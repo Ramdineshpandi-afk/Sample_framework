@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "local":"npx playwright test"
+    "local":"npx playwright test",
+    "api_test": "npx playwright test tests/API"
   },
   "keywords": [],
   "author": "",
