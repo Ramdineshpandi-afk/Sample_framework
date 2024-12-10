@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "local":"npx playwright test",
-    "api_test": "npx playwright test tests/API"
+    "local": "npx playwright test",
+    "ui_test": "npx playwright test tests/ui",
+    "unit_tests": "npx jest"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,12 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.49.0",
-    "@types/node": "^22.10.1"
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.1",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
   }
 }
