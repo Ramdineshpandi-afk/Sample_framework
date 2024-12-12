@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { generateDynamicLocator } from '../helper';
+import { generateDynamicLocator } from '../testUtils';
 
 class ProductPage {
 
@@ -7,7 +7,7 @@ class ProductPage {
   private cartIcon = '.shopping_cart_link';
   private cartIcounCounter = '.shopping_cart_badge';
   private sortDropDown = 'select.product_sort_container';
-  private producePrices= ".inventory_item_price";
+  private producePrices = ".inventory_item_price";
   private sortDropDowntexts = `//option[text()='placeholder']`;
   private addToCartItemsButton = `//div[text()='placeholder']/ancestor::div[@class='inventory_item']//button[text()='ADD TO CART']`;
   private removeCartItemsButton = `//div[text()='placeholder']/ancestor::div[@class='inventory_item']//button[text()='REMOVE']`;
@@ -57,8 +57,12 @@ class ProductPage {
    * @returns {Promise<string | null>}
    */
   async getCartCount(page: Page): Promise<string | null> {
-    const cartCount: any = page.locator(this.cartIcounCounter).textContent();
-    return cartCount;
+    try {
+      const cartCount: any = page.locator(this.cartIcounCounter).textContent();
+      return cartCount;
+    } catch (error) {
+      console.log('Unable to get cartcount:', error);
+    }
   }
 
   /**
@@ -69,10 +73,15 @@ class ProductPage {
    * @returns {Promise<number[]>}
    */
   async getAllProductPrices(page: Page): Promise<number[]> {
-    const prices: number[] = await page.$$eval(this.producePrices, (elements) =>
-      elements.map((el) => parseFloat(el.textContent?.replace("$", "") || "0"))
-    );
-    return prices;
+    try {
+      const prices: number[] = await page.$$eval(this.producePrices, (elements) =>
+        elements.map((el) => parseFloat(el.textContent?.replace("$", "") || "0"))
+      );
+      return prices;
+    }
+    catch (error) {
+      console.log('Unable to get all Product prices', error);
+    }
   }
 
   /**

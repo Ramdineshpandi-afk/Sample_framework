@@ -1,0 +1,40 @@
+{
+    "validAirlineWithOnlyName": {
+        "name": "Airline Inc."
+    },
+    "invalidAirlineData": {},
+    "validAirlineWithAllFields": {
+        "name": "Sri Lankan Airways",
+        "country": "Sri Lanka",
+        "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png",
+        "slogan": "From Sri Lanka",
+        "head_quaters": "Katunayake, Sri Lanka",
+        "website": "www.srilankaaairways.com",
+        "established": "1990"
+    },
+    "emptyAirlineName": {
+        "name": ""
+    },
+    "longAirlineName": {
+        "name": "httpsuploadwikimediaorgwikipedianthumbbQatarAirwaysLogosvgsrilankapppppppppng"
+    },
+    "nullOptionals": {
+        "name": "Sri Lankan Airways",
+        "country": null,
+        "logo": null,
+        "slogan": null,
+        "head_quaters": null,
+        "website": null,
+        "established": null
+    },
+    "nameWithSpecialChar": {
+        "name": "!@#$%^&*()_+{}|:<>?/~"
+    },
+    "nameWithOnlyWhiteSpaces": {
+        "name": "     "
+    },
+    "nameWithFutureEstYear": {
+        "name": "Future Airways",
+        "established": "2050"
+    }
+}

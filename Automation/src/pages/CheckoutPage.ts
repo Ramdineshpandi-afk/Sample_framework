@@ -38,8 +38,14 @@ class CheckoutPage {
    * @returns {Promise<string|null>}
    */
   async getShippingInformation(page: Page): Promise<string | null> {
+    try{
     const ShippingInfo = await page.locator(this.shippingInformationDetails).textContent();
     return ShippingInfo;
+    }
+    catch(error){
+      console.log('Unable to get Shipping Information', error);
+      
+    }
   }
 
 
@@ -51,12 +57,17 @@ class CheckoutPage {
    * @returns {Promise<(string|undefined)[]>}
    */
   async getPaymentInfomrmation(page: Page): Promise<(string | undefined)[]> {
-    await page.waitForSelector(this.summaryInfo);
-    await page.locator(this.summaryInfo).scrollIntoViewIfNeeded();
-    const itemTotal = await page.locator(this.subTotalInfo).textContent();
-    const tax = await page.locator(this.taxInfo).textContent();
-    const total = await page.locator(this.totalInfo).textContent();
-    return [itemTotal, tax, total].map((item) => item?.split('$')[1]);
+    try {
+      await page.waitForSelector(this.summaryInfo);
+      await page.locator(this.summaryInfo).scrollIntoViewIfNeeded();
+      const itemTotal = await page.locator(this.subTotalInfo).textContent();
+      const tax = await page.locator(this.taxInfo).textContent();
+      const total = await page.locator(this.totalInfo).textContent();
+      return [itemTotal, tax, total].map((item) => item?.split('$')[1]);
+    } catch (error) {
+      console.log('Unable to get payment information', error);
+      
+    }
   }
 }
 export default new CheckoutPage;

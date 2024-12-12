@@ -13,9 +13,13 @@ class CartPage {
    * @returns {Promise<string[]>}
    */
   async getCartItems(page: Page): Promise<string[]> {
-    await page.waitForSelector(this.cartItems);
-    const items = await page.locator(this.cartItems).allTextContents();
-    return items;
+    try {
+      await page.waitForSelector(this.cartItems);
+      const items = await page.locator(this.cartItems).allTextContents();
+      return items;
+    } catch (error) {
+      console.log('Unable to get Cart Items:', error);
+    }
   }
   
   /**

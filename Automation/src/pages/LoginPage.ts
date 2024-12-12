@@ -14,7 +14,7 @@ class LoginPage {
    * @async
    * @param {Page} page
    */
-  private async navigateToLogin(page:Page) {
+  private async navigateToLogin(page: Page) {
     await page.goto('/v1/index.html');
   }
 
@@ -41,7 +41,11 @@ class LoginPage {
    * @returns {Promise<string | null>}
    */
   async getErrorMessage(page: Page): Promise<string | null> {
-    return page.locator(this.errorMessage).textContent();
+    try {
+      return page.locator(this.errorMessage).textContent();
+    } catch (error) {
+      console.log('Unable to get Error Message', error);
+    }
   }
 }
 export default new LoginPage;

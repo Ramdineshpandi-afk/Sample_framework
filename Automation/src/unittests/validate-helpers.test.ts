@@ -1,4 +1,4 @@
-import { generateDynamicLocator, areArraysIdentical, checkPriceOrder } from '../helper.ts';
+import { generateDynamicLocator, areArraysIdentical, checkPriceOrder, validateResponseProperty, validateResponseStatus } from '../testUtils.ts';
 
 describe('generateDynamicLocator', () => {
     it('should replace the placeholder with the replacement value', async () => {
@@ -82,5 +82,52 @@ describe('checkPriceOrder', () => {
         const prices = [];
         const result = checkPriceOrder(prices, 'ascending');
         expect(result).toBe(true);
+    });
+});
+
+describe('validate response assertions', () => {
+    // Mock response object
+    const mockResponse = (status, body) => ({
+        status: jest.fn(() => status), // Status as a callable method
+        hasOwnProperty: (field) => field in body, // Check fields in body
+        ...body, // Flatten body properties into the response
+    });
+
+    describe('validateResponseProperty', () => {
+        it('should not throw an error when property exists and matches the expected value', () => {
+            const response = mockResponse(200, { name: 'Airline' });
+
+            expect(() => validateResponseProperty(response, 'name', 'Airline')).not.toThrow();
+        });
+
+        it('should throw an error when property exists but does not match the expected value', () => {
+            const response = mockResponse(200, { name: 'Airline' });
+
+            expect(() => validateResponseProperty(response, 'name', 'Different Name'))
+                .toThrow('Response contains the fields. but values are different, expected value is Different Name but got Airline');
+        });
+
+        it('should throw an error when property does not exist in the response', () => {
+            const response = mockResponse(200, { name: 'Airline' });
+
+            expect(() => validateResponseProperty(response, 'logo'))
+                .toThrow('Response does not contain field: logo');
+        });
+    });
+
+    describe('validateResponseStatus', () => {
+        it('should not throw an error when status matches the expected status', async () => {
+            const response = mockResponse(200, {});
+
+            await expect(validateResponseStatus(response, 200)).resolves.not.toThrow();
+        });
+
+        it('should throw an error when status does not match the expected status', async () => {
+            const response = mockResponse(500, {});
+
+            await expect(validateResponseStatus(response, 200))
+                .rejects
+                .toThrow('Expected status 200, but got 500');
+        });
     });
 });

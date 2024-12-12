@@ -5,13 +5,12 @@ import lockedUsers from "../../testData/lockedUsers.json";
 import products from "../../testData/products.json";
 import ProductPage from '../../pages/ProductPage';
 import CartPage from '../../pages/CartPage';
-import { areArraysIdentical, checkPriceOrder } from '../../helper';
+import { areArraysIdentical, checkPriceOrder } from '../../testUtils';
 import CheckoutPage from '../../pages/CheckoutPage';
 
 
 test.describe('User Login and Account Management', async () => {
 
-  // TC-001: User successfully logs in
   test('should login successfully with valid credentials', async ({ page }) => {
 
     await LoginPage.login(validUsers.username, validUsers.password, page);
@@ -22,7 +21,6 @@ test.describe('User Login and Account Management', async () => {
 
   });
 
-  // TC-002: Locked User Login
   test('should show error for locked-out user', async ({ page }) => {
 
     await LoginPage.login(lockedUsers.username, lockedUsers.password, page);
@@ -37,7 +35,6 @@ test.describe('User Login and Account Management', async () => {
 
 test.describe('Product Listing and Sorting', async () => {
 
-  // TC-003: Sort Items by Price (Lowest to Highest)
   test('User should be able to sort items by price (Lowest to Highest)', async ({ page }) => {
 
     await LoginPage.login(validUsers.username, validUsers.password, page);
@@ -54,7 +51,6 @@ test.describe('Product Listing and Sorting', async () => {
 
 test.describe('Basket Management', async () => {
 
-  // TC-004: Add 3 Items to Basket
   test('should add 3 items to the basket', async ({ page }) => {
 
     await LoginPage.login(validUsers.username, validUsers.password, page);
@@ -69,7 +65,6 @@ test.describe('Basket Management', async () => {
 
   });
 
-  // TC-005: Remove Item from Basket
   test('should remove an item from the basket', async ({ page }) => {
 
     await LoginPage.login(validUsers.username, validUsers.password, page);
@@ -95,8 +90,7 @@ test.describe('Basket Management', async () => {
 });
 
 test.describe('Checkout Process', async () => {
-
-  // TC-006: Proceed to Checkout  
+ 
   test('should be able to checkout', async ({ page }) => {
 
     await LoginPage.login(validUsers.username, validUsers.password, page);
@@ -119,7 +113,6 @@ test.describe('Checkout Process', async () => {
 
   });
 
-  // TC-007: Shipping Information
   test('should show shipping information when checking out', async ({ page }) => {
 
     await LoginPage.login(validUsers.username, validUsers.password, page);
@@ -148,7 +141,6 @@ test.describe('Checkout Process', async () => {
 
   });
 
-  // TC-008: Price Calculation including tax with Multiple Items
   test('should provide correct total when checking out with multiple items', async ({ page }) => {
 
     await LoginPage.login(validUsers.username, validUsers.password, page);
