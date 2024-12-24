@@ -1,0 +1,6 @@
+{
+  "username": "locked_out_user",
+  "password": "secret_sauce",
+  "expectedMessage": "Sorry, this user has been locked out."
+  
+}

@@ -1,0 +1,20 @@
+{
+  "addCartItems": [
+    "Sauce Labs Backpack",
+    "Sauce Labs Fleece Jacket",
+    "Sauce Labs Bike Light"
+  ],
+  "removeCartItem": [
+    "Sauce Labs Backpack"
+  ],
+  "sortOrder": {
+    "order": "ascending",
+    "value": "Price (low to high)"
+  },
+  "shippingInformation": "FREE PONY EXPRESS DELIVERY!",
+  "expectedPrice": {
+    "itemPrice": "89.97",
+    "tax": "7.20",
+    "totalPrice": "97.17"
+  }
+}

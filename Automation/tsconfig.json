@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true, // Prevent emitting output files
+    "resolveJsonModule": true, // Enable JSON imports
+    "types": [
+      "jest"
+    ] // Include Jest's type definitions
+  }
+}
